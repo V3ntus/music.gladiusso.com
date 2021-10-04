@@ -11,6 +11,7 @@
   <meta property="og:title" content="Gladius Synthetic Orchestra">
   <meta property="og:description" content="Official landing for the artist 'Gladius Synthetic Orchestra'">
   <meta property="og:image" content="http://gladiusmusic.rf.gd/images/aiwa.png">
+  <meta name="facebook-domain-verification" content="51k19ywn6okd6cbcdc9z51modz99zz" />
 
   <meta name="twitter:card" content="summary_large_image">
   <meta property="twitter:domain" content="gladiusmusic.rf.gd">
@@ -29,158 +30,213 @@
   <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
   <link rel="stylesheet" type="text/css" href="/css/slick.css">
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://kit.fontawesome.com/bdbbf59900.js" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SFB86BVH05"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-SFB86BVH05');
+  </script>
   <script src="/js/main.js"></script>
   <title>Home - Gladius Music</title>
 </head>
 <body onload="onPageLoadHandler()">
-  <a id="home"></a>
-  <div class="home">
-    <div class="nav">
-      <ul class="nav-bar">
-        <a id="nav-i1" style="display: none;" href="#home"><li id="nav-item home">HOME</li></a>
-        <a id="nav-i2" style="display: none;" href="#mywork"><li id="nav-item work">MY WORK</li></a>
-        <a id="nav-i3" style="display: none;" href="#about"><li id="nav-item about">ABOUT</li></a>
-      </ul>
+  <div id="loading">
+    <div class="loadingindicator"></div>
+  </div>
+  <div class="page">
+
+    <script type="text/javascript">
+      const wait = (delay = 0) =>
+      new Promise(resolve => setTimeout(resolve, delay));
+
+      function setVisible(elementOrSelector, visible) {
+        if (visible) { $(elementOrSelector).addClass("page-vis"); } else {
+          $(elementOrSelector).removeClass("page-vis");
+        }
+      }
+
+      setVisible('.page', false);
+      setVisible('#loading', true);
+      setVisible('.loadingindicator', true);
+
+      document.addEventListener('DOMContentLoaded', () =>
+      wait(1000).then(() => {
+        setVisible('.page', true);
+        setVisible('#loading', false);
+        setVisible('.loadingindicator', false);
+      }));
+    </script>
+
+    <a id="home"></a>
+    <div class="home">
+      <div class="nav">
+        <ul class="nav-bar">
+          <a id="nav-i1" style="display: none;" href="#home"><li id="nav-item home">HOME</li></a>
+          <a id="nav-i2" style="display: none;" href="#mywork"><li id="nav-item work">MY WORK</li></a>
+          <a id="nav-i3" style="display: none;" href="#about"><li id="nav-item about">ABOUT</li></a>
+        </ul>
+      </div>
+
+      <div class="headphoneNotice" style="display: none;">
+        <img id="headphoneNoticeImg" src="images/headphones.png" />
+        <p id="headphoneNoticeText">USE HEADPHONES FOR A BETTER EXPERIENCE</p>
+      </div>
+
+      <div class="introVideo">
+        <video muted style="display: none;" preload="auto" id="journeyVideo">
+          <source src="videos/journey.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="journeyHeader">
+        <img id="journeyHeaderImage" src="/images/journeyPoster.png" loading="lazy" style="display: none;">
+      </div>
+
+      <div class="gso_logo">
+        <img id="gso_image" src="/images/logo1.png" loading="lazy" style="display: none;">
+      </div>
+
+      <div class="fixed-action-btn">
+        <div id="mute_label" class="noselect"></div>
+        <a class="btn-floating grey darken-4 muteBtn noselect" accesskey="m" onclick="muteButton()"><i class="material-icons">music_note</i></a>
+      </div>
+
+      <div class="down_btn">
+        <a href="#mywork"><i id="down_btn_icon" class="material-icons" style="font-size: 40px; color: white; display: none;">keyboard_arrow_down</i></a>
+      </div>
     </div>
 
-    <div class="headphoneNotice" style="display: none;">
-      <img id="headphoneNoticeImg" src="images/headphones.png" />
-      <p id="headphoneNoticeText">USE HEADPHONES FOR A BETTER EXPERIENCE</p>
+    <div class="mywork">
+      <a id="mywork"></a>
+      <div id="top_highlight">
+        <img src="/images/hidden_poster.jpg" id="top-poster" width="100%" style="opacity: 0.7;">
+        <button class="js-modal-btn button" id="yt-play-btn" data-video-id="5QSsEcKLTB8">Play</button>
+        <div class="top_text1"><h3>HIDDEN</h3>A short film bringing attention to mental health over the pandemic lockdown.</div>
+      </div>
     </div>
 
-    <div class="introVideo">
-      <video muted style="display: none;" preload="auto" id="journeyVideo">
-        <source src="videos/journey.mp4" type="video/mp4">
-      </video>
+    <div class="highlights">
+      <h3 style="text-align: center; color: white;">Highlights</h3>
+      <p style="text-align: center; color: white;">A short, highlighted collection of my work</p>
+      <div class="slickCarousel">
+        <div><img src="https://img.youtube.com/vi/ex9sty5eDJg/maxresdefault.jpg" width="100%" style="opacity: 0.3;" loading="lazy"><span id="slide-text"><h1>Journey I</h1><button class="button" id="yt-play-btn" onclick=" window.open('https://open.spotify.com/album/07Kp9yAlrn9cb9PXclvGZk?si=yrm0lkRwSLWWLft9zgIHvg&utm_source=copy-link','_blank')">Play</button><p>Journey is a multi-part series of albums that will span a vast amount of time. The goal of this project is to provoke your own story and interpretation of your own journey.</p></span></div>
+        <div><img src="/images/thegateway.png" width="100%" style="opacity: 0.8;" loading="lazy"><span id="slide-text"><h1>The Gateway</h1><button class="js-modal-btn button" id="yt-play-btn" data-video-id="TTFITasTLlY">Play</button><p>A rescore of the short film "The Gateway" by Fredrik Lindton and Ritualen</p></span></div>
+        <div><img src="/images/apex_bg.png" width="100%" style="opacity: 0.8;" loading="lazy"><span id="slide-text"><h1>Apex</h1><button class="js-modal-btn button" id="yt-play-btn" data-video-id="pposAGNDx20">Play</button><p>A dark, heavy, and emotional score portraying loss and cautious journey</p></span></div>
+        <div><img src="/images/aiwa.png" width="100%" style="opacity: 0.8;" loading="lazy"><span id="slide-text"><h1>And I wandered aimlessly</h1><button class="js-modal-btn button" id="yt-play-btn" data-video-id="L8ivBIiiimE">Play</button><p></p></span></div>
+        <div><img src="https://img.youtube.com/vi/ZIwTCPhoTeM/maxresdefault.jpg" width="100%" style="opacity: 0.4;" loading="lazy"><span id="slide-text"><h1>tíminn flýgur</h1><button class="js-modal-btn button" id="yt-play-btn" data-video-id="ZIwTCPhoTeM">Play</button><p></p></span></div>
+        <div><img src="https://img.youtube.com/vi/Ry1TfZVP1L0/mqdefault.jpg" width="100%" style="opacity: 0.3;" loading="lazy"><span id="slide-text"><h1>blíður</h1><button class="js-modal-btn button" id="yt-play-btn" data-video-id="Ry1TfZVP1L0">Play</button><p>Featuring Danielle Troyer as co-producer</p></span></div>
+        <div><img src="/images/27.png" width="100%" style="opacity: 0.3;" loading="lazy"><span id="slide-text"><h1>#27</h1><button class="js-modal-btn button" id="yt-play-btn" data-video-id="v9zQ4OV-ZQc">Play</button><p></p></span></div>
+        <!-- <div><img src="" width="100%" style="opacity: 0.8;"><span id="slide-text"><h1></h1><button class="js-modal-btn button" id="yt-play-btn" data-video-id="">Play</button><p></p></span></div> -->
+      </div>
+      <div class="slickCArrows">
+        <a class="slick-prev"><i class="material-icons" style="font-size: 40px; color: white;">keyboard_arrow_left</i></a>
+        <a class="slick-next"><i class="material-icons" style="font-size: 40px; color: white;">keyboard_arrow_right</i></a>
+      </div>
     </div>
 
-    <div class="journeyHeader">
-      <img id="journeyHeaderImage" src="/images/journeyPoster.png" loading="lazy" style="display: none;">
+    <div id="releases">
+      <h3 style="text-align: center;">Releases</h3>
+      <hr />
+      <div id="leftside">
+          <center><h2 class="prevent-backdrop-blur">Albums</h2><hr class="prevent-backdrop-blur"/></center>
+            <div class="releaseentry" style="background-image: url('https://i.scdn.co/image/ab67616d0000b273a403c1c9a04cdeded9732e83')">
+              <h3>Evening Melodies Vol. 1</h3>
+              <a href="https://open.spotify.com/album/055xRzbgPZX9XwDW5cGs3D" title="Spotify" target="_blank"><i alt="Spotify" class="fab fa-spotify fa_music"></i></a>
+              <a title="Apple Music" href="https://music.apple.com/us/album/evening-melodies-vol-1-single/1558377874" target="_blank"><i alt="Apple Music" class="fab fa-itunes fa_music"></i></a>
+              <a title="Play trailer on Youtube" class="js-modal-btn" data-video-id="rRkeV-Vuc_I"><i alt="Play on YouTube" class="fab fa-youtube fa_music"></i></a>
+            </div>
+
+            <div class="releaseentry" style="background-image: url('/images/journey.png')">
+              <h3>Journey I</h3><br>
+              <a title="Spotify" href="https://open.spotify.com/album/07Kp9yAlrn9cb9PXclvGZk?si=yrm0lkRwSLWWLft9zgIHvg" target="_blank"><i alt="Spotify" class="fab fa-spotify fa_music"></i></a>
+              <a title="Apple Music" href="https://music.apple.com/us/album/journey-i/1555575638" target="_blank"><i alt="Apple Music" class="fab fa-itunes fa_music"></i></a>
+              <a title="Play trailer on Youtube" class="js-modal-btn" data-video-id="ex9sty5eDJg"><i alt="Play on YouTube" class="fab fa-youtube fa_music"></i></a>
+            </div>
+
+            <div class="releaseentry" style="background-image: url('/images/sal.png')">
+              <h3>Serenades and Lullabies</h3><br>
+              <a title="Spotify" href="https://open.spotify.com/album/2Bq8Dlbj3xTDMhPd7algGO" target="_blank"><i alt="Spotify" class="fab fa-spotify fa_music"></i></a>
+              <a title="Apple Music" href="https://music.apple.com/us/album/serenades-and-lullabies/1540166836" target="_blank"><i alt="Apple Music" class="fab fa-itunes fa_music"></i></a>
+              <a title="Play trailer on Youtube" class="js-modal-btn" data-video-id="SOfDBcE_e0M"><i alt="Play on YouTube" class="fab fa-youtube fa_music"></i></a>
+            </div>
+
+            <div class="releaseentry" style="background-image: url('/images/aiwa.png')">
+              <h3>And I wandered aimlessly</h3>
+              <a title="Spotify" href="https://open.spotify.com/album/4y0lSUJQYa5BsPQQco6jRm?si=6WFqqKuUSROK9wvp7M7Kvg" target="_blank"><i alt="Spotify" class="fab fa-spotify fa_music"></i></a>
+              <a title="Apple Music" href="https://music.apple.com/us/album/and-i-wandered-aimlessly/1526705263" target="_blank"><i alt="Apple Music" class="fab fa-itunes fa_music"></i></a>
+              <a title="Play trailer on Youtube" class="js-modal-btn" data-video-id="L8ivBIiiimE"><i alt="Play on YouTube" class="fab fa-youtube fa_music"></i></a>
+            </div>
+      </div>
+
+      <div id="rightside">
+        <center>
+          <h2 class="prevent-backdrop-blur">Singles</h2><hr class="prevent-backdrop-blur"/>
+        </center>
+        <div class="releaseentry" style="background-image: url('https://i.scdn.co/image/ab67616d0000b2739dd1ffd1e7fe46ef2a63f7a2')">
+          <h3>Overture: Entropy</h3>
+          <a title="Spotify" href="https://open.spotify.com/album/6fa3qXqsUwdfxCkCzhP87P" target="_blank"><i alt="Spotify" class="fab fa-spotify fa_music"></i></a>
+          <a title="Apple Music" href="https://music.apple.com/us/album/overture-entropy-single/1566826835" target="_blank"><i alt="Apple Music" class="fab fa-itunes fa_music"></i></a>
+          <a title="Play on YouTube" class="js-modal-btn" data-video-id="yjp8nYsuZkE"><i alt="YouTube" class="fab fa-youtube fa_music"></i></a>
+        </div>
+
+        <div class="releaseentry" style="background-image: url('https://i.scdn.co/image/ab67616d00001e0298598812f69a8059b506ffa6')">
+          <h3>Redirection</h3>
+          <a title="Spotify" href="https://open.spotify.com/track/5xODV3v08muiz9ao9omfDl" target="_blank"><i alt="Spotify" class="fab fa-spotify fa_music"></i></a>
+          <a title="Apple Music" href="https://music.apple.com/us/album/redirection-single/1539690207" target="_blank"><i alt="Apple Music" class="fab fa-itunes fa_music"></i></a>
+          <a title="Play on YouTube" class="js-modal-btn" data-video-id="1Xd34KJ0nHA"><i alt="YouTube" class="fab fa-youtube fa_music"></i></a>
+        </div>
+
+        <div class="releaseentry" style="background-image: url('https://i.scdn.co/image/ab67616d00001e02b807c7a5c4600dfb09b539d4')">
+          <h3>Betrayal</h3>
+          <a title="Spotify" href="https://open.spotify.com/track/2QI6BgA6S3dEVCGfOankbm" target="_blank"><i alt="Spotify" class="fab fa-spotify fa_music"></i></a>
+          <a title="Apple Music" href="https://music.apple.com/us/album/betrayal-single/1531726076" target="_blank"><i alt="Apple Music" class="fab fa-itunes fa_music"></i></a>
+          <a title="Play on YouTube" class="js-modal-btn" data-video-id="XZ_u0ZQs12g"><i alt="YouTube" class="fab fa-youtube fa_music"></i></a>
+        </div>
+
+        <div class="releaseentry" style="background-image: url('https://i.scdn.co/image/ab67616d00001e02669447605bee28df54730c12')">
+          <h3>Artemis</h3>
+          <a title="Spotify" href="https://open.spotify.com/track/2YjQDfTd46lvIoBxMDXluc" target="_blank"><i alt="Spotify" class="fab fa-spotify fa_music"></i></a>
+          <a title="Apple Music" href="https://music.apple.com/us/album/artemis-single/1538459979" target="_blank"><i alt="Apple Music" class="fab fa-itunes fa_music"></i></a>
+          <a title="Play on YouTube" class="js-modal-btn" data-video-id="E_vPGelQd08"><i alt="YouTube" class="fab fa-youtube fa_music"></i></a>
+        </div>
+      </div>
+      <span class="spacer" style="color: white; text-align: center;"><p>Find more of my discography in the links bellow</p></span>
+      <hr />
     </div>
 
-    <div class="gso_logo">
-      <img id="gso_image" src="/images/logo1.png" loading="lazy" style="display: none;">
-    </div>
-
-    <div class="fixed-action-btn">
-      <div id="mute_label" class="noselect"></div>
-      <a class="btn-floating grey darken-4 muteBtn noselect" accesskey="m" onclick="muteButton()"><i class="material-icons">music_note</i></a>
-    </div>
-
-    <div class="down_btn">
-      <a href="#mywork"><i id="down_btn_icon" class="material-icons" style="font-size: 40px; color: white; display: none;">keyboard_arrow_down</i></a>
+    <a id="about"></a>
+    <div class="end_part">
+      <div class="about">
+        <img src="/images/cover2.jpg" style="opacity: 1;" loading="lazy">
+        <!--<img src="/images/cover2.jpg" style="opacity: 0.8;" class="overlayImg" loading="lazy">-->
+        <div class="bio">
+          A young, aspiring composer for film and media. Blurring the line between dark and emotive music, I often express my ideas through loss or remission through a calm atmosphere, or a dark soundscape.
+        </div>
+        <div class="socials">
+          <ul>
+            <a href="https://open.spotify.com/artist/4NXjwAooTVsCxIoSsmD2ns"><li class="fab fa-spotify"></li></a>
+            <a href="https://music.apple.com/us/artist/gladius-synthetic-orchestra/1493153485"><li class="fab fa-itunes"></li></a>
+            <a href="https://www.facebook.com/gladiussyntheticorchestra/"><li class="fab fa-facebook"></li></a>
+            <a href="https://www.youtube.com/GladiusSyntheticOrchestra"><li class="fab fa-youtube"></li></a>
+            <a href="https://music.amazon.com/artists/B083918CF5/gladius-synthetic-orchestra"><li class="fab fa-amazon"></li></a>
+            <a href="https://instagram.com/gladiussyntheticorchestra"><li class="fab fa-instagram"></li></a>
+            <a href="https://www.imdb.com/name/nm12169761/"><li class="fab fa-imdb"></li></a>
+          </ul>
+        </div>
+        <br />
+      </div>
+      <hr style="height: 1px;"/>
+      <footer style="color:#555; font-size: 10px;">
+        <center>&copy; Joseph Packard, Danielle Troyer<br /><a href="mailto:contact.GladiusMusic@gmail.com" style="color: #555; font-size: 12px">contact.GladiusMusic@gmail.com</a></center>
+      </footer>
+      <div style="height: 60px;"></div>
     </div>
   </div>
-
-  <div class="mywork">
-    <a id="mywork"></a>
-    <div id="top_highlight">
-      <img src="/images/hidden_poster.jpg" id="top-poster" width="100%" style="opacity: 0.7;">
-      <button class="js-modal-btn button" id="yt-play-btn" data-video-id="5QSsEcKLTB8">Play</button>
-      <div class="top_text1"><h3>HIDDEN</h3>A short film bringing attention to mental health over the pandemic lockdown.</div>
-    </div>
-  </div>
-
-
-  <div id="releases">
-    <h3 style="text-align: center;">My Music</h3>
-    <hr />
-    <div id="leftside">
-      <table>
-        <tr><h2>Albums</h2></tr>
-
-        <tr>
-          <td><img src="/images/journey.png" width="150px" height="150px" loading="lazy"></td>
-          <td><h3>Journey I</h3><hr><br>
-            <a title="Spotify" href="https://open.spotify.com/album/07Kp9yAlrn9cb9PXclvGZk?si=yrm0lkRwSLWWLft9zgIHvg" target="_blank"><i alt="Spotify" class="fab fa-spotify fa_music"></i></a>
-            <a title="Apple Music" href="https://music.apple.com/us/album/journey-i/1555575638" target="_blank"><i alt="Apple Music" class="fab fa-itunes fa_music"></i></a>
-            <a title="Play trailer on Youtube" class="js-modal-btn" data-video-id="ex9sty5eDJg"><i alt="Play on YouTube" class="fab fa-youtube fa_music"></i></a>
-          </td>
-        </tr>
-
-        <tr>
-          <td><img src="/images/sal.png" width=150px height=150px loading="lazy"></td>
-          <td><h3>Serenades and Lullabies</h3><hr /><br>
-            <a title="Spotify" href="https://open.spotify.com/album/2Bq8Dlbj3xTDMhPd7algGO" target="_blank"><i alt="Spotify" class="fab fa-spotify fa_music"></i></a>
-            <a title="Apple Music" href="https://music.apple.com/us/album/serenades-and-lullabies/1540166836" target="_blank"><i alt="Apple Music" class="fab fa-itunes fa_music"></i></a>
-            <a title="Play trailer on Youtube" class="js-modal-btn" data-video-id="SOfDBcE_e0M"><i alt="Play on YouTube" class="fab fa-youtube fa_music"></i></a>
-          </td>
-        </tr>
-
-        <tr>
-          <td><img src="/images/aiwa.png" width="150px" height="150px" loading="lazy"></td>
-          <td><h3>And I wandered aimlessly</h3><hr><br>
-            <a title="Spotify" href="https://open.spotify.com/album/4y0lSUJQYa5BsPQQco6jRm?si=6WFqqKuUSROK9wvp7M7Kvg" target="_blank"><i alt="Spotify" class="fab fa-spotify fa_music"></i></a>
-            <a title="Apple Music" href="https://music.apple.com/us/album/and-i-wandered-aimlessly/1526705263" target="_blank"><i alt="Apple Music" class="fab fa-itunes fa_music"></i></a>
-            <a title="Play trailer on Youtube" class="js-modal-btn" data-video-id="L8ivBIiiimE"><i alt="Play on YouTube" class="fab fa-youtube fa_music"></i></a>
-          </td>
-        </tr>
-      </table>
-    </div>
-
-    <div id="rightside">
-      <table>
-        <tr><h2>Singles</h2></tr>
-        <tr>
-          <td><h3>Redirection</h3><hr><br>
-            <a title="Spotify" href="https://open.spotify.com/track/5xODV3v08muiz9ao9omfDl" target="_blank"><i alt="Spotify" class="fab fa-spotify fa_music"></i></a>
-            <a title="Apple Music" href="https://music.apple.com/us/album/redirection-single/1539690207" target="_blank"><i alt="Apple Music" class="fab fa-itunes fa_music"></i></a>
-            <a title="Play on YouTube" class="js-modal-btn" data-video-id="1Xd34KJ0nHA"><i alt="YouTube" class="fab fa-youtube fa_music"></i></a>
-          </td>
-          <td><img src="https://i.scdn.co/image/ab67616d00001e0298598812f69a8059b506ffa6" width=150px height=150px loading="lazy"></td>
-        </tr>
-
-        <tr>
-          <td>
-            <h3>Betrayal</h3><hr><br>
-            <a title="Spotify" href="https://open.spotify.com/track/2QI6BgA6S3dEVCGfOankbm" target="_blank"><i alt="Spotify" class="fab fa-spotify fa_music"></i></a>
-            <a title="Apple Music" href="https://music.apple.com/us/album/betrayal-single/1531726076" target="_blank"><i alt="Apple Music" class="fab fa-itunes fa_music"></i></a>
-            <a title="Play on YouTube" class="js-modal-btn" data-video-id="XZ_u0ZQs12g"><i alt="YouTube" class="fab fa-youtube fa_music"></i></a>
-          </td>
-          <td><img src="https://i.scdn.co/image/ab67616d00001e02b807c7a5c4600dfb09b539d4" width="150px" height="150px" loading="lazy"></td>
-        </tr>
-
-        <tr>
-          <td>
-            <h3>Artemis</h3><hr><br>
-            <a title="Spotify" href="https://open.spotify.com/track/2YjQDfTd46lvIoBxMDXluc" target="_blank"><i alt="Spotify" class="fab fa-spotify fa_music"></i></a>
-            <a title="Apple Music" href="https://music.apple.com/us/album/artemis-single/1538459979" target="_blank"><i alt="Apple Music" class="fab fa-itunes fa_music"></i></a>
-            <a title="Play on YouTube" class="js-modal-btn" data-video-id="E_vPGelQd08"><i alt="YouTube" class="fab fa-youtube fa_music"></i></a>
-          </td>
-          <td><img src="https://i.scdn.co/image/ab67616d00001e02669447605bee28df54730c12" width="150px" height="150px" loading="lazy"></td>
-        </tr>
-      </table>
-    </div>
-    <span class="spacer" style="color: white; text-align: center;"><p>Find more of my discography in the links bellow</p></span>
-  </div>
-
-  <a id="about"></a>
-  <div class="about">
-    <hr>
-    <!--<img src="/images/IMG_1904_crop_square_800x800.jpg" width="700px" height="700px">-->
-    <img src="/images/cover2.jpg" style="opacity: 0.2;" loading="lazy">
-    <img src="/images/cover2.jpg" style="opacity: 0.8;" class="overlayImg" loading="lazy">
-    <div class="bio">
-      A young, aspiring composer for film and media. Blurring the line between dark and emotive music, I often express my ideas through loss or remission through a calm atmosphere, or a dark soundscape.
-    </div>
-    <div class="socials">
-      <ul>
-        <a href="https://open.spotify.com/artist/4NXjwAooTVsCxIoSsmD2ns"><li class="fab fa-spotify"></li></a>
-        <a href="https://music.apple.com/us/artist/gladius-synthetic-orchestra/1493153485"><li class="fab fa-itunes"></li></a>
-        <a href="https://www.facebook.com/gladiussyntheticorchestra/"><li class="fab fa-facebook"></li></a>
-        <a href="https://www.youtube.com/GladiusSyntheticOrchestra"><li class="fab fa-youtube"></li></a>
-        <a href="https://music.amazon.com/artists/B083918CF5/gladius-synthetic-orchestra"><li class="fab fa-amazon"></li></a>
-        <a href="https://instagram.com/gladiussyntheticorchestra"><li class="fab fa-instagram"></li></a>
-        <a href="https://www.imdb.com/name/nm12169761/"><li class="fab fa-imdb"></li></a>
-      </ul>
-    </div>
-  </div>
-  <footer style="color:#444; font-size: 12px;">
-  &copy; Joseph Packard, Danielle Troyer -- <a href="mailto:contact.GladiusMusic@gmail.com" style="color: #555; font-size: 12px">contact.GladiusMusic@gmail.com</a>
-</footer>
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 
   // modern Chrome requires { passive: false } when adding event
@@ -267,11 +323,24 @@
     $( "#journeyHeaderImage" ).fadeIn(700);
   };
 
-  $(document).ready(function(){
-    $('.fixed-action-btn').floatingActionButton();
+  // $(document).ready(function(){
+  //   $('.fixed-action-btn').floatingActionButton();
+  // });
+</script>
+<script src="/js/jquery-modal-video.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script>
+  $(".js-modal-btn").modalVideo();
+  $(".slickCarousel").slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    prevArrow: ".slick-prev",
+    nextArrow: ".slick-next",
+    focusOnSelect: true,
+    speed: 700,
+    //variableWidth: true,
   });
 </script>
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>-->
-<script src="/js/jquery-modal-video.js"></script>
-<!--<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>-->
 </html>
