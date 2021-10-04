@@ -30,9 +30,10 @@
   width: 100%;
 }
 
-.slickCArrows, .slickCArrows2 {
+.slickCArrows {
+  padding-left: 6px; /* it's not CENTERED */
   margin: auto;
-  width: 84px;
+  width: 100px;
 }
 
 .slick-arrow i {
