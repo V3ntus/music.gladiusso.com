@@ -1,3 +1,5 @@
+console.log("Please don't visit my site on a device like the Galaxy Fold. They're the width of toothpicks. Why.")
+
 // left: 37, up: 38, right: 39, down: 40,
 // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
 var keys = {37: 1, 38: 1, 39: 1, 40: 1};
@@ -45,6 +47,12 @@ function sleep(ms) {
 }
 
 async function onPageLoadHandler() {
+  setVisible('.page', true);
+  setVisible('#loading', false);
+  setVisible('.loadingindicator', false);
+  $('#loading').css("display", "none");
+  $('.loadingindicator').css("display", "none");
+
   document.body.style.overflow = 'hidden';
   window.onbeforeunload = function () {
     window.scrollTo(0,0);
