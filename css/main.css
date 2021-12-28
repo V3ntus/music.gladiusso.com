@@ -38,6 +38,10 @@ html * {
   font-family: "Posterama", "Source Sans Pro", sans-serif;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  color: white;
+}
+
 /* page loading */
 #loading {
   display: flex;
@@ -291,21 +295,15 @@ p.muteLabel {
 }
 
 .releaseentry::after {
-  -webkit-backdrop-filter: blur(4px);
-  backdrop-filter: blur(4px) brightness(0.8);
-  content: "";
+  /* -webkit-backdrop-filter: blur(4px);
+  box-shadow: 0 30px 40px rgba(0,0,0,.1);
+  backdrop-filter: blur(4px) brightness(0.8); */
   display: block;
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
   left: -4px;
-}
-
-/* Prevent contents from being blurred */
-.releaseentry *, .prevent-backdrop-blur {
-  position: relative;
-  z-index: 1;
 }
 
 #releases {
@@ -375,6 +373,15 @@ p.muteLabel {
 
 #releases #rightside * {
   text-align: center;
+}
+
+#devprofile {
+  margin: auto;
+  width: 75%;
+}
+
+#devprofile object {
+  fill: #aaa;
 }
 
 .end_part {
