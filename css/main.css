@@ -34,12 +34,19 @@
 
 /* MAIN */
 
-html * {
+* {
   font-family: "Posterama", "Source Sans Pro", sans-serif;
+  color: white;
 }
 
 h1, h2, h3, h4, h5, h6 {
   color: white;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* page loading */
@@ -258,7 +265,7 @@ p.muteLabel {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.top_text1 h1 {
+.top_text1 h3 {
   bottom: 0;
   top: 0;
   margin: 7px 0 0 0;
@@ -315,11 +322,7 @@ p.muteLabel {
   background-color: rgba(90, 90, 90, 0.1);
 }
 
-#releases td {
-  padding: 5px;
-}
-
-#releases a {
+#releases #leftside :is(a, i) {
   -moz-transition: color 0.2s ease-in-out;
   -webkit-transition: color 0.2s ease-in-out;
   -ms-transition: color 0.2s ease-in-out;
@@ -327,9 +330,10 @@ p.muteLabel {
   text-decoration: none;
   color: inherit;
   padding: 8px;
+  font-size: 45px;
 }
 
-#releases a:hover {
+#releases #leftside a:hover {
   color: #777;
 }
 
@@ -341,7 +345,7 @@ p.muteLabel {
   font-size: 30px;
 }
 
-#releases #leftside {
+#leftside {
   width: 50%;
   float: left;
   padding: 20px;
@@ -358,12 +362,27 @@ p.muteLabel {
   text-align: center;
 }
 
-#releases #rightside {
+#rightside {
   width: 50%;
   float: right;
   padding: 20px;
   position: relative;
   display: block;
+}
+
+#releases #rightside :is(a, i) {
+  -moz-transition: color 0.2s ease-in-out;
+  -webkit-transition: color 0.2s ease-in-out;
+  -ms-transition: color 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out;
+  text-decoration: none;
+  color: inherit;
+  padding: 8px;
+  font-size: 45px;
+}
+
+#releases #rightside a:hover {
+  color: #777;
 }
 
 #releases #rightside h3 {
@@ -500,6 +519,19 @@ p.muteLabel {
     margin-left: -50px;
   }
 
+  #releases :is(#rightside, #leftside) h3 {
+    font-size: 20px;
+  }
+
+  #releases :is(#leftside, #rightside) :is(a, i) {
+    font-size: 40px;
+  }
+
+  .repos :is(#rightside, #leftside) {
+    width: initial;
+    width: 100%;
+  }
+
   .about {
     width: 90%;
   }
@@ -525,6 +557,11 @@ p.muteLabel {
     float: none;
     padding: 20px;
   }
+
+  #releases :is(#leftside, #rightside) :is(a, i) {
+    font-size: 50px;
+  }
+
   html {
     font-size: 12px !important;
   }
