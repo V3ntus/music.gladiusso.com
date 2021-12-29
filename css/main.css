@@ -394,13 +394,52 @@ p.muteLabel {
   text-align: center;
 }
 
+.repos {
+  display: flex;
+  padding-top: 30px;
+}
+
+:is(.repos, #leftside, #rightside) a {
+  padding: 10px;
+}
+
 #devprofile {
   margin: auto;
+  padding-bottom: 50px;
   width: 75%;
 }
 
-#devprofile object {
-  fill: #aaa;
+#devprofile .repo_item {
+  padding: 10px;
+  padding-top: 0;
+  padding-bottom: 30px;
+  border: 1px solid white;
+  border-radius: 20px;
+}
+
+.repo_item img {
+  width: 80%;
+  padding-top: 10px;
+}
+
+.repo_item_description {
+  padding-bottom: 5px;
+  padding-left: 10px;
+}
+
+.repo_item h5 {
+  padding-left: 20px;
+}
+
+.github_stats {
+  width: 100%;
+  display: flex;
+  top: 0;
+  margin: auto;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .end_part {
@@ -569,6 +608,24 @@ p.muteLabel {
   #releases img {
     width: 80px;
     height: 80px;
+  }
+
+  .repos {
+    display: block;
+  }
+
+  #devprofile .repo_item {
+    text-align: center;
+    width: 80%;
+    margin: auto;
+  }
+
+  .github_stats img {
+    width: 100%;
+  }
+
+  .img_less_width {
+    width: 60% !important;
   }
 
   .fa_music {
