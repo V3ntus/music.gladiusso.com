@@ -1,19 +1,32 @@
 import React from "react";
-import { animated, config, useSpring } from "@react-spring/web";
+import { animated, config, to, useSpring } from "@react-spring/web";
+import { LocomotiveScrollProvider } from "react-locomotive-scroll";
 
 import Home from "../pages/Home";
+import Work from "../pages/Work";
 
 export default function HomeContainer() {
   const [showing, isShowing] = React.useState(false);
   const [isFullNavOpen, setIsFullNavOpen] = React.useState(false);
+  const [muted, setMuted] = React.useState(true);
 
-  const { y, o } = useSpring({
+  const locoscroll = React.useRef(null);
+  const homeRef = React.useRef(null);
+  const workRef = React.useRef(null);
+  const aboutRef = React.useRef(null);
+  const refs = [homeRef, workRef, aboutRef];
+
+  const { y, o, s, x } = useSpring({
     from: {
       y: -100,
       o: 0,
+      s: 1,
+      x: 0,
     },
     y: showing && !isFullNavOpen ? 0 : -100,
     o: showing ? 1 : 0,
+    s: isFullNavOpen ? 0.5 : 1,
+    x: isFullNavOpen ? 25 : 0,
     config: config.slow,
   });
 
@@ -26,7 +39,11 @@ export default function HomeContainer() {
   }, []);
 
   return (
-    <>
+    <LocomotiveScrollProvider
+      options={{ smooth: true }}
+      containerRef={locoscroll}
+      watch={[]}
+    >
       <div
         style={{
           position: "fixed",
@@ -50,15 +67,36 @@ export default function HomeContainer() {
             onClick={() => setIsFullNavOpen(false)}
             style={{
               fontSize: "3em",
+              marginRight: "1em",
             }}
           >
             &times;
           </button>
         </div>
         <ul>
-          {["Home", "Work", "About Me"].map((e) => (
-            <li>
-              <a href={`/${e.toLowerCase().replace(" ", "")}`}>{e}</a>
+          {["Home", "Work", "About Me"].map((e, idx) => (
+            <li key={e.toLowerCase().replace(" ", "")}>
+              <button
+                onMouseEnter={() =>
+                  refs[idx].current.scrollIntoView({
+                    block: "center",
+                    inline: "center",
+                  })
+                }
+                onClick={() => {
+                  setIsFullNavOpen(false);
+                  setTimeout(
+                    () =>
+                      refs[idx].current.scrollIntoView({
+                        block: "start",
+                        inline: "nearest",
+                      }),
+                    500
+                  );
+                }}
+              >
+                {e}
+              </button>
             </li>
           ))}
         </ul>
@@ -83,10 +121,6 @@ export default function HomeContainer() {
         >
           GLADIUS SYNTHETIC ORCHESTRA
         </span>
-        {/*
-            Menu button - when clicked, scale out a preview of the entire webpage and use it as a background. Show links to sections ('Home', 'My Work', 'About')
-                On section link hover, highlight that section of the page in the background.
-            */}
         <animated.div
           style={{
             display: "flex",
@@ -95,7 +129,13 @@ export default function HomeContainer() {
           }}
         >
           <button
-            onClick={() => setIsFullNavOpen(true)}
+            onClick={() => {
+              setIsFullNavOpen(true);
+              refs[0].current.scrollIntoView({
+                block: "center",
+                inline: "center",
+              });
+            }}
             style={{
               border: "1px solid white",
             }}
@@ -147,12 +187,70 @@ export default function HomeContainer() {
           </button>
         </animated.div>
       </animated.div>
-      <Home
-        isNavOpen={isFullNavOpen}
-        sx={{
-          opacity: o,
+      <div
+        id="floating-mute-btn"
+        style={{
+          display: "flex",
+          position: "fixed",
+          bottom: "23px",
+          right: "23px",
+          zIndex: 4,
+          textAlign: "right",
+          alignItems: "center",
+          justifyContent: "center",
         }}
-      />
-    </>
+      >
+        <span
+          className="noselect"
+          style={{
+            padding: "4px",
+          }}
+        >
+          {muted ? (
+            <>
+              Un<u>m</u>ute
+            </>
+          ) : (
+            <>
+              <u>M</u>ute
+            </>
+          )}
+        </span>
+        <button
+          style={{
+            backgroundColor: "#333333",
+            borderRadius: "50%",
+            padding: "8px",
+            cursor: "pointer",
+          }}
+          onClick={() => setMuted(!muted)}
+        >
+          <span className="material-symbols-outlined">music_note</span>
+        </button>
+      </div>
+      <main data-scroll-container ref={locoscroll} id="loco-scroll-container">
+        <animated.div
+          style={{
+            position: "relative",
+            top: 0,
+            transform: to(
+              [x, y],
+              (x, y) => `translateX(${x}%) translateY(${y / 2}vh)`
+            ),
+            scale: s.to((s) => s),
+          }}
+        >
+          <div ref={refs[0]} data-scroll-section>
+            <Home isNavOpen={isFullNavOpen} isMuted={muted} />
+          </div>
+          <div ref={refs[1]} data-scroll-section>
+            <Work isNavOpen={isFullNavOpen} />
+          </div>
+          <div ref={refs[2]} data-scroll-section>
+            <Work isNavOpen={isFullNavOpen} />
+          </div>
+        </animated.div>
+      </main>
+    </LocomotiveScrollProvider>
   );
 }

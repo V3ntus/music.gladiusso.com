@@ -1,9 +1,8 @@
 import React from "react";
 import { useSpring, animated, config } from "@react-spring/web";
 
-export default function Home({ isMuted }) {
+export default function Work() {
   const [isShowing, setIsShowing] = React.useState(false);
-  const introVideo = React.useRef(null);
 
   const { o } = useSpring({
     from: {
@@ -15,8 +14,6 @@ export default function Home({ isMuted }) {
 
   React.useEffect(() => {
     setIsShowing(true);
-
-    let introVideoP = introVideo.current.play();
 
     return () => {
       setIsShowing(false);
@@ -34,31 +31,21 @@ export default function Home({ isMuted }) {
         left: 0,
         width: "100%",
         height: "100vh",
-        backgroundColor: "#000000",
+        backgroundColor: "#111111",
         o: o.to((o) => o),
       }}
     >
       <div
         style={{
-          width: "100%",
-          height: "100%",
-          position: "absolute",
+          width: "300px",
+          height: "200px",
+          backgroundColor: "grey",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
         }}
       >
-        <video
-          muted={isMuted}
-          preload="auto"
-          style={{
-            minWidth: "100%",
-            minHeight: "100%",
-            margin: "0 auto",
-            width: "400px",
-            position: "fixed",
-          }}
-          ref={introVideo}
-        >
-          <source src="/Videos/journey.mp4" type="video/mp4" />
-        </video>
+        <span>Hi there</span>
       </div>
     </animated.div>
   );
