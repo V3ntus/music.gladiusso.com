@@ -17,6 +17,7 @@ export default function Home({ isMuted }) {
     setIsShowing(true);
 
     let introVideoP = introVideo.current.play();
+    // introVideo.current;
 
     return () => {
       setIsShowing(false);
@@ -45,6 +46,14 @@ export default function Home({ isMuted }) {
           position: "absolute",
         }}
       >
+        <div
+          style={{
+            position: "absolute",
+            height: "100%",
+            width: "100%",
+            zIndex: "10",
+          }}
+        ></div>
         <video
           muted={isMuted}
           preload="auto"

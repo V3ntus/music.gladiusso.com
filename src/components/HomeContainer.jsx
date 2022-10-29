@@ -1,6 +1,9 @@
 import React from "react";
 import { animated, config, to, useSpring } from "@react-spring/web";
-import { LocomotiveScrollProvider } from "react-locomotive-scroll";
+import {
+  LocomotiveScrollProvider,
+  useLocomotiveScroll,
+} from "react-locomotive-scroll";
 
 import Home from "../pages/Home";
 import Work from "../pages/Work";
@@ -11,6 +14,21 @@ export default function HomeContainer() {
   const [muted, setMuted] = React.useState(true);
 
   const locoscroll = React.useRef(null);
+  let scrollInst = useLocomotiveScroll();
+  let scroll = scrollInst.scroll;
+
+  const handleScrollToId = (id) => {
+    const elem = document.getElementById(id);
+    if (scroll) {
+      scroll.scrollTo(elem, {
+        duration: 1000,
+        easing: [0, 0, 0, 1],
+      });
+    } else {
+      elem.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   const homeRef = React.useRef(null);
   const workRef = React.useRef(null);
   const aboutRef = React.useRef(null);
@@ -32,6 +50,7 @@ export default function HomeContainer() {
 
   React.useEffect(() => {
     isShowing(true);
+    // setInterval(() => console.log(scrollInst), 1000);
 
     return () => {
       isShowing(false);
@@ -42,7 +61,7 @@ export default function HomeContainer() {
     <LocomotiveScrollProvider
       options={{ smooth: true }}
       containerRef={locoscroll}
-      watch={[]}
+      watch={[isFullNavOpen, showing]}
     >
       <div
         style={{
@@ -74,23 +93,19 @@ export default function HomeContainer() {
           </button>
         </div>
         <ul>
-          {["Home", "Work", "About Me"].map((e, idx) => (
+          {["Home", "Work", "About Me"].map((e) => (
             <li key={e.toLowerCase().replace(" ", "")}>
               <button
                 onMouseEnter={() =>
-                  refs[idx].current.scrollIntoView({
-                    block: "center",
-                    inline: "center",
-                  })
+                  handleScrollToId(`${e.split(" ")[0].toLowerCase()}_section`)
                 }
                 onClick={() => {
                   setIsFullNavOpen(false);
                   setTimeout(
                     () =>
-                      refs[idx].current.scrollIntoView({
-                        block: "start",
-                        inline: "nearest",
-                      }),
+                      handleScrollToId(
+                        `${e.split(" ")[0].toLowerCase()}_section`
+                      ),
                     500
                   );
                 }}
@@ -131,10 +146,7 @@ export default function HomeContainer() {
           <button
             onClick={() => {
               setIsFullNavOpen(true);
-              refs[0].current.scrollIntoView({
-                block: "center",
-                inline: "center",
-              });
+              handleScrollToId(`home_section`);
             }}
             style={{
               border: "1px solid white",
@@ -240,13 +252,13 @@ export default function HomeContainer() {
             scale: s.to((s) => s),
           }}
         >
-          <div ref={refs[0]} data-scroll-section>
+          <div ref={refs[0]} id="home_section" data-scroll-section>
             <Home isNavOpen={isFullNavOpen} isMuted={muted} />
           </div>
-          <div ref={refs[1]} data-scroll-section>
+          <div ref={refs[1]} id="work_section" data-scroll-section>
             <Work isNavOpen={isFullNavOpen} />
           </div>
-          <div ref={refs[2]} data-scroll-section>
+          <div ref={refs[2]} id="about_section" data-scroll-section>
             <Work isNavOpen={isFullNavOpen} />
           </div>
         </animated.div>
