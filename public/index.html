@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <title>Gladius Synthetic Orchestra</title>
+
+    <style>
+      .loader:empty {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 3em;
+        height: 3em;
+        border: 0.6em solid rgba(255, 255, 255, 0.845);
+        border-left: 0.6em dotted #000000;
+        border-radius: 50%;
+        animation: load8 1.7s infinite cubic-bezier(0.7, 0, 0, 1);
+      }
+
+      @keyframes load8 {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root">
+      <div class="loader"></div>
+    </div>
+  </body>
+</html>
