@@ -1,7 +1,7 @@
 import React from "react";
 import { useSpring, animated, config } from "@react-spring/web";
 
-export default function Home({ isMuted }) {
+export default function Home({ isMuted, blur }) {
   const [isShowing, setIsShowing] = React.useState(false);
   const [isVideoDone, setIsVideoDone] = React.useState(false);
   const [isVideoDoneLoading, setIsVideoDoneLoading] = React.useState(false);
@@ -25,10 +25,13 @@ export default function Home({ isMuted }) {
           .getAttribute("data-src") !== "#"
       ) {
         setIsVideoDoneLoading(true);
-        introVideo?.current?.play();
-        introVideo?.current?.addEventListener("ended", () => {
-          setIsVideoDone(true);
-        });
+        if (introVideo && introVideo.current) {
+          introVideo.current.play();
+          introVideo.current.addEventListener("ended", () => {
+            setIsVideoDone(true);
+          });
+          clearInterval(introVideoInterval);
+        }
       }
     }, 100);
 
@@ -59,6 +62,7 @@ export default function Home({ isMuted }) {
           height: "100%",
           position: "absolute",
           maxWidth: "100vw",
+          top: -50,
         }}
       >
         {/* Overlay to prevent video selection */}
@@ -68,6 +72,8 @@ export default function Home({ isMuted }) {
             height: "100%",
             width: "100%",
             zIndex: "10",
+            top: 0,
+            left: 0,
           }}
         ></div>
         {isVideoDoneLoading ? (
@@ -86,7 +92,8 @@ export default function Home({ isMuted }) {
                 src="/images/journey_2.cover.png"
                 id="journey_2_cover"
                 style={{
-                  position: "relative",
+                  objectFit: "cover",
+                  maxWidth: "100vw",
                 }}
               />
             </div>
@@ -100,6 +107,14 @@ export default function Home({ isMuted }) {
                 margin: "0 auto",
                 width: "400px",
                 position: "fixed",
+                willChange: "transform",
+                ...(blur && blur > 0
+                  ? {
+                      filter: `blur(${blur}px)`,
+                      transform: `scale(${~~(100 - blur * 2)}%)`,
+                      opacity: `${Math.min(Math.max(1 - blur / 5, 0.5), 1)}`,
+                    }
+                  : {}),
               }}
               ref={introVideo}
             >

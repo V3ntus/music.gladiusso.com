@@ -43,6 +43,7 @@ export default function HomeContainer() {
   const [showing, isShowing] = React.useState(false);
   const [isFullNavOpen, setIsFullNavOpen] = React.useState(false);
   const [muted, setMuted] = React.useState(true);
+  const [homeBlur, setHomeBlur] = React.useState(0);
 
   const homeRef = React.useRef(null);
   const workRef = React.useRef(null);
@@ -56,18 +57,37 @@ export default function HomeContainer() {
     }
   });
 
-  const { y, o, s, x, fullNavO } = useSpring({
+  const parallaxContainerListener = setInterval(() => {
+    if (parallaxContainer.current.container) {
+      parallaxContainer.current.container.current.addEventListener(
+        "scroll",
+        () => {
+          setHomeBlur(
+            Math.min(
+              parallaxContainer.current.container.current.scrollTop / 100,
+              6
+            )
+          );
+        }
+      );
+      clearInterval(parallaxContainerListener);
+    }
+  });
+
+  const { y, o, s, x, invertedO, fullNavO, blur } = useSpring({
     from: {
       y: -100,
       o: 0,
       s: 1,
       x: 0,
+      invertedO: 0,
       fullNavO: 1,
     },
     y: showing && !isFullNavOpen ? 0 : -100,
     o: showing ? 1 : 0,
     s: isFullNavOpen ? 0.5 : 1,
     x: isFullNavOpen ? 25 : 0,
+    invertedO: isFullNavOpen ? 1 : 0,
     fullNavO: isFullNavOpen ? 0 : 1,
     config: config.slow,
   });
@@ -290,6 +310,20 @@ export default function HomeContainer() {
           <span className="material-symbols-outlined">music_note</span>
         </button>
       </div>
+      <animated.div
+        style={{
+          position: "sticky",
+          zIndex: -5,
+          opacity: fullNavO.to((o) => o),
+          display: isFullNavOpen
+            ? "none"
+            : fullNavO.to((o) => {
+                if (o === 1) return "block";
+              }),
+        }}
+      >
+        <Home isNavOpen={isFullNavOpen} isMuted={muted} blur={homeBlur} />
+      </animated.div>
       <Parallax pages={3} ref={parallaxContainer}>
         <animated.div
           style={{
@@ -301,9 +335,16 @@ export default function HomeContainer() {
             scale: s.to((s) => s),
           }}
         >
-          <ParallaxLayer offset={0} speed={1} id="home_section">
-            <div ref={refs[0]}></div>
-            <Home isNavOpen={isFullNavOpen} isMuted={muted} />
+          <ParallaxLayer offset={0} speed={1}>
+            <animated.div
+              id="home_section"
+              ref={refs[0]}
+              style={{
+                opacity: invertedO.to((o) => o),
+              }}
+            >
+              <Home isNavOpen={isFullNavOpen} isMuted={true} />
+            </animated.div>
           </ParallaxLayer>
           <ParallaxLayer
             offset={0.99}
