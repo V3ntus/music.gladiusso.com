@@ -8,7 +8,6 @@ import HomeContainer from "./components/HomeContainer";
 
 // Style
 import "./index.css";
-import "./locomotive-scroll.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 

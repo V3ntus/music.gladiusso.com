@@ -35,18 +35,14 @@ export default function Work() {
         o: o.to((o) => o),
       }}
     >
-      <div
+      <img
+        src="/images/hidden_poster.jpg"
+        alt="Hidden film poster"
         style={{
-          width: "300px",
-          height: "200px",
-          backgroundColor: "grey",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          objectFit: "cover",
+          maxWidth: "100%",
         }}
-      >
-        <span>Hi there</span>
-      </div>
+      />
     </animated.div>
   );
 }

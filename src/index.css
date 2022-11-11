@@ -111,3 +111,7 @@ button {
 .full-nav button:hover {
     color: white;
 }
+
+#journey_2_cover {
+    position: relative;
+}
