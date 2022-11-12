@@ -44,6 +44,7 @@ export default function HomeContainer() {
   const [isFullNavOpen, setIsFullNavOpen] = React.useState(false);
   const [muted, setMuted] = React.useState(true);
   const [homeBlur, setHomeBlur] = React.useState(0);
+  const [isVideoDone, setVideoDone] = React.useState(false);
 
   const homeRef = React.useRef(null);
   const workRef = React.useRef(null);
@@ -74,7 +75,7 @@ export default function HomeContainer() {
     }
   });
 
-  const { y, o, s, x, invertedO, fullNavO, blur } = useSpring({
+  const { y, o, s, x, invertedO, fullNavO } = useSpring({
     from: {
       y: -100,
       o: 0,
@@ -87,7 +88,7 @@ export default function HomeContainer() {
     o: showing ? 1 : 0,
     s: isFullNavOpen ? 0.5 : 1,
     x: isFullNavOpen ? 25 : 0,
-    invertedO: isFullNavOpen ? 1 : 0,
+    invertedO: isFullNavOpen || isVideoDone ? 1 : 0,
     fullNavO: isFullNavOpen ? 0 : 1,
     config: config.slow,
   });
@@ -120,6 +121,10 @@ export default function HomeContainer() {
           inline: "nearest",
         });
     }
+  };
+
+  const handleVideoDone = (done) => {
+    setVideoDone(done);
   };
 
   return (
@@ -322,7 +327,12 @@ export default function HomeContainer() {
               }),
         }}
       >
-        <Home isNavOpen={isFullNavOpen} isMuted={muted} blur={homeBlur} />
+        <Home
+          isNavOpen={isFullNavOpen}
+          isMuted={muted}
+          blur={homeBlur}
+          videoDone={handleVideoDone}
+        />
       </animated.div>
       <Parallax pages={3} ref={parallaxContainer}>
         <animated.div
@@ -343,7 +353,11 @@ export default function HomeContainer() {
                 opacity: invertedO.to((o) => o),
               }}
             >
-              <Home isNavOpen={isFullNavOpen} isMuted={true} />
+              <Home
+                isNavOpen={isFullNavOpen}
+                isMuted={true}
+                videoDone={handleVideoDone}
+              />
             </animated.div>
           </ParallaxLayer>
           <ParallaxLayer

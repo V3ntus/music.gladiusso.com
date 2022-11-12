@@ -1,7 +1,7 @@
 import React from "react";
 import { useSpring, animated, config } from "@react-spring/web";
 
-export default function Home({ isMuted, blur }) {
+export default function Home({ isMuted, blur, videoDone }) {
   const [isShowing, setIsShowing] = React.useState(false);
   const [isVideoDone, setIsVideoDone] = React.useState(false);
   const [isVideoDoneLoading, setIsVideoDoneLoading] = React.useState(false);
@@ -29,6 +29,7 @@ export default function Home({ isMuted, blur }) {
           introVideo.current.play();
           introVideo.current.addEventListener("ended", () => {
             setIsVideoDone(true);
+            videoDone(true);
           });
           clearInterval(introVideoInterval);
         }
