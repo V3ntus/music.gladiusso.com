@@ -2,8 +2,20 @@ import React from "react";
 import { animated, config, to, useSpring } from "@react-spring/web";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faSpotify,
+  faItunes,
+  faYoutube,
+  faFacebook,
+  faAmazon,
+  faInstagram,
+  faImdb,
+} from "@fortawesome/free-brands-svg-icons";
+
 import Home from "../pages/Home";
 import Work from "../pages/Work";
+import ModalVideo from "react-modal-video";
 
 function useEventListener(eventName, handler, element = window) {
   // Create a ref that stores handler
@@ -45,6 +57,7 @@ export default function HomeContainer() {
   const [muted, setMuted] = React.useState(true);
   const [homeBlur, setHomeBlur] = React.useState(0);
   const [isVideoDone, setVideoDone] = React.useState(false);
+  const [modalVideo, setModalVideo] = React.useState("");
 
   const homeRef = React.useRef(null);
   const workRef = React.useRef(null);
@@ -117,8 +130,8 @@ export default function HomeContainer() {
         .getElementById(["home_section", "work_section", "about_section"][page])
         .scrollIntoView({
           behavior: "smooth",
-          block: "nearest",
-          inline: "nearest",
+          block: "start",
+          inline: "start",
         });
     }
   };
@@ -127,8 +140,19 @@ export default function HomeContainer() {
     setVideoDone(done);
   };
 
+  const handleVideoChange = (id) => {
+    setModalVideo(id);
+  };
+
   return (
     <>
+      <ModalVideo
+        channel="youtube"
+        autoplay={true}
+        isOpen={modalVideo !== ""}
+        videoId={modalVideo}
+        onClose={() => setModalVideo("")}
+      />
       <div
         style={{
           position: "fixed",
@@ -138,6 +162,7 @@ export default function HomeContainer() {
           width: "100vw",
           height: "100vh",
           backgroundColor: "rgba(255, 255, 255, 0.15)",
+          overflow: "hidden",
         }}
         className={isFullNavOpen ? "full-nav" : "full-nav hidden"}
       >
@@ -274,47 +299,49 @@ export default function HomeContainer() {
           </button>
         </animated.div>
       </animated.div>
-      <div
-        id="floating-mute-btn"
-        style={{
-          display: "flex",
-          position: "fixed",
-          bottom: "23px",
-          right: "23px",
-          zIndex: 4,
-          textAlign: "right",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <span
-          className="noselect"
+      {!isVideoDone && (
+        <div
+          id="floating-mute-btn"
           style={{
-            padding: "4px",
+            display: "flex",
+            position: "fixed",
+            bottom: "23px",
+            right: "23px",
+            zIndex: 4,
+            textAlign: "right",
+            alignItems: "center",
+            justifyContent: "center",
           }}
         >
-          {muted ? (
-            <>
-              Un<u>m</u>ute
-            </>
-          ) : (
-            <>
-              <u>M</u>ute
-            </>
-          )}
-        </span>
-        <button
-          style={{
-            backgroundColor: "#333333",
-            borderRadius: "50%",
-            padding: "8px",
-            cursor: "pointer",
-          }}
-          onClick={() => setMuted(!muted)}
-        >
-          <span className="material-symbols-outlined">music_note</span>
-        </button>
-      </div>
+          <span
+            className="noselect"
+            style={{
+              padding: "4px",
+            }}
+          >
+            {muted ? (
+              <>
+                Un<u>m</u>ute
+              </>
+            ) : (
+              <>
+                <u>M</u>ute
+              </>
+            )}
+          </span>
+          <button
+            style={{
+              backgroundColor: "#333333",
+              borderRadius: "50%",
+              padding: "8px",
+              cursor: "pointer",
+            }}
+            onClick={() => setMuted(!muted)}
+          >
+            <span className="material-symbols-outlined">music_note</span>
+          </button>
+        </div>
+      )}
       <animated.div
         style={{
           position: "sticky",
@@ -334,7 +361,15 @@ export default function HomeContainer() {
           videoDone={handleVideoDone}
         />
       </animated.div>
-      <Parallax pages={3} ref={parallaxContainer}>
+      <Parallax
+        pages={4}
+        ref={parallaxContainer}
+        style={{
+          ...(isFullNavOpen && {
+            overflow: "hidden",
+          }),
+        }}
+      >
         <animated.div
           style={{
             top: 0,
@@ -360,52 +395,87 @@ export default function HomeContainer() {
               />
             </animated.div>
           </ParallaxLayer>
+          {/*<ParallaxLayer*/}
+          {/*  offset={0.99}*/}
+          {/*  speed={1.1}*/}
+          {/*  style={{*/}
+          {/*    display: "flex",*/}
+          {/*    flexDirection: "column",*/}
+          {/*    alignItems: "center",*/}
+          {/*    justifyContent: "center",*/}
+          {/*    zIndex: 99,*/}
+          {/*  }}*/}
+          {/*>*/}
+          {/*  <animated.h1*/}
+          {/*    style={{*/}
+          {/*      fontSize: "100px",*/}
+          {/*      opacity: fullNavO.to((o) => o),*/}
+          {/*    }}*/}
+          {/*  >*/}
+          {/*    Work*/}
+          {/*  </animated.h1>*/}
+          {/*</ParallaxLayer>*/}
+          {/*<ParallaxLayer*/}
+          {/*  offset={0.99}*/}
+          {/*  speed={1.3}*/}
+          {/*  style={{*/}
+          {/*    display: "flex",*/}
+          {/*    flexDirection: "column",*/}
+          {/*    alignItems: "center",*/}
+          {/*    justifyContent: "center",*/}
+          {/*    zIndex: 99,*/}
+          {/*  }}*/}
+          {/*>*/}
+          {/*  <animated.span*/}
+          {/*    style={{*/}
+          {/*      opacity: fullNavO.to((o) => o),*/}
+          {/*    }}*/}
+          {/*  >*/}
+          {/*    A short, highlighted collection of my work*/}
+          {/*  </animated.span>*/}
+          {/*</ParallaxLayer>*/}
           <ParallaxLayer
-            offset={0.99}
-            speed={1.5}
+            offset={1}
+            speed={0.1}
             style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              zIndex: 99,
+              zIndex: 5,
+              opacity: 0.5,
+              backgroundImage: "url('/images/hidden_poster.jpg')",
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center",
+              cursor: "pointer",
             }}
+            onClick={() => setModalVideo("5QSsEcKLTB8")}
           >
-            <animated.h1
-              style={{
-                fontSize: "100px",
-                opacity: fullNavO.to((o) => o),
-              }}
-            >
-              Work
-            </animated.h1>
-          </ParallaxLayer>
-          <ParallaxLayer
-            offset={0.99}
-            speed={1.3}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              zIndex: 99,
-            }}
-          >
-            <animated.span
-              style={{
-                opacity: fullNavO.to((o) => o),
-              }}
-            >
-              A short, highlighted collection of my work
-            </animated.span>
-          </ParallaxLayer>
-          <ParallaxLayer offset={1} speed={1} id="work_section">
             <div ref={refs[1]}></div>
-            <Work isNavOpen={isFullNavOpen} />
           </ParallaxLayer>
           <ParallaxLayer
-            offset={1.99}
-            speed={1.5}
+            offset={1}
+            speed={0.5}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              background: "none",
+              pointerEvents: "none",
+              zIndex: 5,
+            }}
+            id="work_section"
+          >
+            <h1>HIDDEN</h1>
+            <span>A short film with my original music</span>
+          </ParallaxLayer>
+          <ParallaxLayer offset={2} speed={1}>
+            <Work
+              isNavOpen={isFullNavOpen}
+              handleModalVideo={handleVideoChange}
+            />
+          </ParallaxLayer>
+          <ParallaxLayer
+            offset={2.99}
+            speed={1.2}
             style={{
               display: "flex",
               alignItems: "center",
@@ -422,12 +492,82 @@ export default function HomeContainer() {
               About Me
             </animated.h1>
           </ParallaxLayer>
-          <ParallaxLayer offset={2} speed={1} id="about_section">
+          <ParallaxLayer offset={3} speed={0.1}>
+            <img
+              src="/images/cover2.jpg"
+              alt="Self portrait"
+              style={{
+                marginLeft: "25%",
+              }}
+            />
+          </ParallaxLayer>
+          <ParallaxLayer offset={3} speed={0.7} id="about_section">
             <div ref={refs[2]}></div>
-            <Work isNavOpen={isFullNavOpen} />
+            <div
+              style={{
+                width: "400px",
+                marginTop: "15%",
+                marginLeft: "50%",
+                zIndex: 99,
+              }}
+            >
+              <h1>Gladius Synthetic Orchestra</h1>A young, aspiring composer for
+              film and media. Blurring the line between dark and emotive music,
+              I often express my ideas through loss or remission through a calm
+              atmosphere, or a dark soundscape.
+              <div className="about_me_socials">
+                <ul>
+                  <a href="https://open.spotify.com/artist/4NXjwAooTVsCxIoSsmD2ns">
+                    <FontAwesomeIcon icon={faSpotify} />
+                  </a>
+                  <a href="https://music.apple.com/us/artist/gladius-synthetic-orchestra/1493153485">
+                    <FontAwesomeIcon icon={faItunes} />
+                  </a>
+                  <a href="https://www.facebook.com/gladiussyntheticorchestra/">
+                    <FontAwesomeIcon icon={faFacebook} />
+                  </a>
+                  <a href="https://www.youtube.com/GladiusSyntheticOrchestra">
+                    <FontAwesomeIcon icon={faYoutube} />
+                  </a>
+                  <a href="https://music.amazon.com/artists/B083918CF5/gladius-synthetic-orchestra">
+                    <FontAwesomeIcon icon={faAmazon} />
+                  </a>
+                  <a href="https://instagram.com/gladiussyntheticorchestra">
+                    <FontAwesomeIcon icon={faInstagram} />
+                  </a>
+                  <a href="https://www.imdb.com/name/nm12169761/">
+                    <FontAwesomeIcon icon={faImdb} />
+                  </a>
+                </ul>
+              </div>
+            </div>
+            <div
+              style={{
+                position: "absolute",
+                color: "#aaaaaa",
+                fontSize: "12px",
+                bottom: "25%",
+                left: 0,
+                textAlign: "center",
+                width: "100%",
+              }}
+            >
+              &copy; Joseph Packard, Danielle Troyer
+              <br />
+              <a
+                href="mailto:contact.GladiusMusic@gmail.com"
+                style={{
+                  color: "#888888",
+                  fontSize: "10px",
+                }}
+              >
+                contact.GladiusMusic@gmail.com
+              </a>
+            </div>
           </ParallaxLayer>
         </animated.div>
       </Parallax>
+      <hr />
     </>
   );
 }
