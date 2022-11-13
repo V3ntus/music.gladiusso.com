@@ -263,7 +263,7 @@ export default function HomeContainer() {
                 alignItems: "center",
               }}
             >
-              {["_1", "_2", "_3"].map(() => (
+              {["_1", "_2", "_3"].map((el) => (
                 <div
                   style={{
                     display: "flex",
@@ -273,14 +273,16 @@ export default function HomeContainer() {
                     width: "18px",
                     height: "2px",
                   }}
+                  key={`top_${el}`}
                 >
-                  {["_1", "_2", "_3"].map((_) => (
+                  {["_1", "_2", "_3"].map((el) => (
                     <div
                       style={{
                         position: "relative",
                         width: "2px",
                         height: "2px",
                       }}
+                      key={`horiz_${el}`}
                     >
                       <span
                         style={{
