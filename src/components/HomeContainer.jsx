@@ -565,6 +565,8 @@ export default function HomeContainer() {
               >
                 contact.GladiusMusic@gmail.com
               </a>
+              <br />
+              <a href="https://github.com/V3ntus/music.gladiusso.com/tree/redesign" target="_blank">GitHub</a>
             </div>
           </ParallaxLayer>
         </animated.div>
