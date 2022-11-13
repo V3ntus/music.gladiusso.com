@@ -189,22 +189,10 @@ export default function HomeContainer() {
             <li key={e.toLowerCase().replace(" ", "")}>
               <button
                 onMouseEnter={() =>
-                  // handleScrollToId(
-                  //   `${e.split(" ")[0].toLowerCase()}_section`,
-                  //   false
-                  // )
                   handleScrollToPage(idx, false)
                 }
                 onClick={() => {
                   setIsFullNavOpen(false);
-                  // setTimeout(
-                  //   () =>
-                  //     handleScrollToId(
-                  //       `${e.split(" ")[0].toLowerCase()}_section`,
-                  //       true
-                  //     ),
-                  //   500
-                  // );
                   handleScrollToPage(idx, true);
                 }}
               >
@@ -397,45 +385,6 @@ export default function HomeContainer() {
               />
             </animated.div>
           </ParallaxLayer>
-          {/*<ParallaxLayer*/}
-          {/*  offset={0.99}*/}
-          {/*  speed={1.1}*/}
-          {/*  style={{*/}
-          {/*    display: "flex",*/}
-          {/*    flexDirection: "column",*/}
-          {/*    alignItems: "center",*/}
-          {/*    justifyContent: "center",*/}
-          {/*    zIndex: 99,*/}
-          {/*  }}*/}
-          {/*>*/}
-          {/*  <animated.h1*/}
-          {/*    style={{*/}
-          {/*      fontSize: "100px",*/}
-          {/*      opacity: fullNavO.to((o) => o),*/}
-          {/*    }}*/}
-          {/*  >*/}
-          {/*    Work*/}
-          {/*  </animated.h1>*/}
-          {/*</ParallaxLayer>*/}
-          {/*<ParallaxLayer*/}
-          {/*  offset={0.99}*/}
-          {/*  speed={1.3}*/}
-          {/*  style={{*/}
-          {/*    display: "flex",*/}
-          {/*    flexDirection: "column",*/}
-          {/*    alignItems: "center",*/}
-          {/*    justifyContent: "center",*/}
-          {/*    zIndex: 99,*/}
-          {/*  }}*/}
-          {/*>*/}
-          {/*  <animated.span*/}
-          {/*    style={{*/}
-          {/*      opacity: fullNavO.to((o) => o),*/}
-          {/*    }}*/}
-          {/*  >*/}
-          {/*    A short, highlighted collection of my work*/}
-          {/*  </animated.span>*/}
-          {/*</ParallaxLayer>*/}
           <ParallaxLayer
             offset={1}
             speed={0.1}
