@@ -188,9 +188,7 @@ export default function HomeContainer() {
           {["Home", "Work", "About Me"].map((e, idx) => (
             <li key={e.toLowerCase().replace(" ", "")}>
               <button
-                onMouseEnter={() =>
-                  handleScrollToPage(idx, false)
-                }
+                onMouseEnter={() => handleScrollToPage(idx, false)}
                 onClick={() => {
                   setIsFullNavOpen(false);
                   handleScrollToPage(idx, true);
