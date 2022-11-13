@@ -516,6 +516,7 @@ export default function HomeContainer() {
               <a
                 href="https://github.com/V3ntus/music.gladiusso.com/tree/redesign"
                 target="_blank"
+                rel="noreferrer"
               >
                 GitHub
               </a>

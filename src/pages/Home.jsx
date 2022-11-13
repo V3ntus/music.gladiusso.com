@@ -40,6 +40,7 @@ export default function Home({ isMuted, blur, videoDone }) {
       setIsShowing(false);
       clearInterval(introVideoInterval);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
