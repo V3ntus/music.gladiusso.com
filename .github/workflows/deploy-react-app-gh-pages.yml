@@ -27,4 +27,4 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - name: Deploy react app to github pages
-      uses: V3ntus/deploy-react-to-ghpages@3fc4c6adb9dafdc32213851f56062c48b2c70503
+      uses: V3ntus/deploy-react-to-ghpages@fa58ab8a186d49e0ac3d5572feade72ab69b8005
