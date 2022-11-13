@@ -554,7 +554,7 @@ export default function HomeContainer() {
                 width: "100%",
               }}
             >
-              &copy; Joseph Packard, Danielle Troyer
+              &copy; Joseph Packard - Design by Danielle Troyer
               <br />
               <a
                 href="mailto:contact.GladiusMusic@gmail.com"
